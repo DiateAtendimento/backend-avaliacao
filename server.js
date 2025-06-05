@@ -8,6 +8,25 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/avaliacao', async (req, res) => {
+  // Validação dos campos obrigatórios
+  const { clareza, resolvida, tempoResposta, experienciaGeral, comentario } = req.body;
+
+  const respostasValidas = ['Excelente', 'Bom', 'Regular', 'Ruim'];
+
+  if (
+    !clareza || !resolvida || !tempoResposta || !experienciaGeral ||
+    !respostasValidas.includes(clareza) ||
+    !respostasValidas.includes(resolvida) ||
+    !respostasValidas.includes(tempoResposta) ||
+    !respostasValidas.includes(experienciaGeral)
+  ) {
+    return res.status(400).json({ status: 'erro', mensagem: 'Respostas obrigatórias inválidas ou ausentes.' });
+  }
+
+  if (comentario && comentario.length > 500) {
+    return res.status(400).json({ status: 'erro', mensagem: 'Comentário muito grande (máximo 500 caracteres).' });
+  }
+
   try {
     const dados = req.body;
 
