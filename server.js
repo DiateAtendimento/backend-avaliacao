@@ -4,7 +4,9 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://atendimentorpps.netlify.app'
+}));
 app.use(express.json());
 
 app.post('/api/avaliacao', async (req, res) => {
