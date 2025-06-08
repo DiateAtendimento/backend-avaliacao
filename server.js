@@ -28,15 +28,6 @@ mongoose
   .catch(err => console.error('❌ Erro ao conectar ao MongoDB:', err.message));
 
 // 3) Schema/Model
-/*const avaliacaoSchema = new mongoose.Schema({
-  clareza:       { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
-  resolvida:     { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
-  tempoResposta: { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
-  experienciaGeral: { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
-  comentario:    { type: String, maxlength: 500 },
-  criadoEm:      { type: Date, default: Date.now }
-});
-*/
  const avaliacaoSchema = new mongoose.Schema({
    clareza:       { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
    resolvida:     { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
