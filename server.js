@@ -28,7 +28,7 @@ mongoose
   .catch(err => console.error('❌ Erro ao conectar ao MongoDB:', err.message));
 
 // 3) Schema/Model
-const avaliacaoSchema = new mongoose.Schema({
+/*const avaliacaoSchema = new mongoose.Schema({
   clareza:       { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
   resolvida:     { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
   tempoResposta: { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
@@ -36,6 +36,25 @@ const avaliacaoSchema = new mongoose.Schema({
   comentario:    { type: String, maxlength: 500 },
   criadoEm:      { type: Date, default: Date.now }
 });
+*/
+ const avaliacaoSchema = new mongoose.Schema({
+   clareza:       { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
+   resolvida:     { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
+   tempoResposta: { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
+   experienciaGeral: { type: String, enum: ['Excelente','Bom','Regular','Ruim'], required: true },
+   comentario:    { type: String, maxlength: 500 },
+   criadoEm:      { type: Date, default: Date.now },
+   criadoEmLocal: { 
+     type: String, 
+     default: () => new Date().toLocaleString('pt-BR', {
+       timeZone: 'America/Sao_Paulo',
+       hour12: false,
+       year: 'numeric', month: '2-digit', day: '2-digit',
+       hour: '2-digit', minute: '2-digit', second: '2-digit'
+     })
+   }
+ });
+
 const Avaliacao = mongoose.model('Avaliacao', avaliacaoSchema);
 
 // 4) Middlewares
